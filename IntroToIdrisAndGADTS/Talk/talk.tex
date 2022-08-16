@@ -49,7 +49,7 @@
   \frametitle{Syntax}
   What do GADTs actually look like?
   \begin{minted}{haskell}
-    {-# Langauge GADTs #-}
+    {-# LANGUAGE GADTs #-}
     -- this is the data constructor
     data Expr a where
     -- these are the type constructors:
@@ -108,7 +108,7 @@
 \begin{frame}[fragile]
 \frametitle{Correctness by Construction}
 \begin{itemize}
-  \item GADTs now typecheck our object language expressions in our meta langauge.
+  \item GADTs now type-check our object language expressions in our meta language.
   \item It is \emph{not possible} for me to accidentally write addition on Boolean expressions.
   \item Idea - create your data structures in such away that they enforce correctness?.
 \end{itemize}
@@ -118,7 +118,7 @@
   \frametitle{Moving Away from Haskell}
   \begin{itemize}
     \item Extensions overload: PolyKinds, DataKinds, KindSignatures, KindAsType, etc.
-    \item Reification and Reflection: Haskell has two langauges!
+    \item Reification and Reflection: Haskell has two languages!
     \item Just to get more expressivity and functionality for GADTS?
   \end{itemize}
 \end{frame}
