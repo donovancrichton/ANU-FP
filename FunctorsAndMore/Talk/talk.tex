@@ -37,6 +37,48 @@
 \end{frame}
 
 \begin{frame}[fragile]
+  \frametitle{What is a type class?}
+  recall:
+  \begin{minted}{haskell}
+class Num a where
+  (+) :: a -> a -> a
+  (-) :: a -> a -> a
+  (*) :: a -> a -> a
+  negate :: a -> a
+  abs :: a -> a
+  signum :: a -> a
+  fromInteger :: Integer -> a
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Type classes for programmers}
+  \begin{itemize}
+  \item A way to introduce ad-hoc polymorphism to our functions.
+  \item Specify a 'class' of behaviours for particular types.
+  \item Allow operator and function overloading (e.g + on Double and Int)
+  \item We can use any type that \emph{subscribes} to the class.
+  \end{itemize}
+  \begin{minted}{haskell}
+f :: Num a => a -> a
+f x = x + x
+  \end{minted}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Type classes for mathematicians}
+  \begin{itemize}
+  \item A way to define our own algebra! (almost)
+  \item Recall that an algebra is a triple $(A, F, L)$
+  \item $A$ is our carrier set.
+  \item $F$ is a set of operations on $A$.
+  \item $L$ is our set of axioms or laws for $F$.
+  \item This is why ':doc' in Haskell gives us something interesting.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
   \frametitle{Functors in Haskell}
   \begin{minted}{bash}
 Prelude> :doc Functor
@@ -59,6 +101,17 @@ class Functor (f :: * -> *) where
 \end{frame}
 
 \begin{frame}[fragile]
+  \frametitle{What is a functor?}
+  \begin{itemize}
+  \item A morphism between categories (of course!)
+  \item Inspired by functors from category theory.
+  \item A structure preserving map from objects in FA to objects in FB
+  \item $map : (a \overset{g}{\rightarrow} b) \rightarrow F(a) 
+         \overset{F(g)}{\rightarrow} F(b)$ where $F$ is a functor.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
   \frametitle{Functors in Idris}
   \begin{minted}{bash}
 interface Prelude.Functor : (Type -> Type) -> Type
@@ -76,15 +129,59 @@ Methods:
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{We were promised laws! Lets enforce our own!}
-  Verified Functor Demo shown here.
+  \frametitle{Functors as an algebra}
+  let $map \text{ (also called $\langle \$ \rangle$)}: (a \overset{g}{\rightarrow} b) \rightarrow F(a) 
+         \overset{F(g)}{\rightarrow} F(b)$ where $F$ is a functor. \\ \\
+  let $F= (A, \{map\}, \{map(id) = id, map(g \circ h) = map(g) \circ map(h)\})$ \\
+  \\
+  So we have our carrier set $A$, one operation $map$, and two axioms/laws.
+
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{References}
-\bibliography{references}{}
+  \frametitle{Legal Functors in Idris}
+  Here we show a demo on a legal Functor definition in Idris with an example
+  candidate implementation on lists.
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Applicative Functors}
+  An Applicative Functor $F$ is another common algebra over a carrier set $A$.
+  With one binary operation and one unary operation: 
+  \begin{align*}
+    &pure : A \rightarrow F(A) \\
+    &apply \text{ (also called $\langle \ast \rangle$)} : F(A \overset{g}{\rightarrow} B) \rightarrow F(A) 
+               \overset{F(g)}{\rightarrow} F(B)
+  \end{align*}
+   And our set of axioms:
+   \begin{align*}
+    \text{\color{orange}{Identity:}}\\
+    apply(pure(id), v) &= v \\
+    \text{\color{orange}{Composition:}}\\
+    apply(pure(\circ,apply(u, apply(v, w))) &= apply(u,(apply(v, w))) \\
+    \text{\color{orange}{Homomorphism:}}\\
+    apply(pure(f), pure(x)) &= pure(f(x)) \\
+    \text{\color{orange}{Interchange:}}\\
+    apply(u, pure(y)) &= apply(pure(\lambda f.f(y)),u) 
+   \end{align*}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Applicative Functors 2}
+  Our Algebra for Applicative Functors is formally: \\
+  Let $F = (A,\{pure,\langle \ast \rangle>\},\{id, com, hom, int\})$ \\
+  \\
+  Why is the Applicative algebra also a Functor? \\
+  We can define $map$ as follows: \\
+  $g <\$> x = pure(g) \langle \ast \rangle x$ \\
+  \\
+  Let's see the demo!
+\end{frame}
+
+% \begin{frame}[fragile]
+% \frametitle{References}
+% \bibliography{references}{}
+% \end{frame}
 
 \end{document}
 
