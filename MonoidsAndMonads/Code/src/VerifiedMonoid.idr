@@ -1,3 +1,4 @@
+module Verified Monoid
 
 %default total
 %hide Prelude.(<+>)

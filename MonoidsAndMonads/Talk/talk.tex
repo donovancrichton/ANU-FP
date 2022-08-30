@@ -3,6 +3,7 @@
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{footline}[frame number]
  
+\usepackage[normalem]{ulem}
 \usepackage[utf8]{inputenc}
 
 \usepackage[newfloat]{minted}
@@ -155,17 +156,64 @@
 \begin{frame}[fragile]
   \frametitle{Finally the M-Word!}
   \begin{itemize}
-    \item It's cursed. \textit{When you understand it, you lose the ability to explain it to others.} 
+    \item \textit{In addition to it's being good and useful...it's also cursed.}\footnote{\href{https://www.youtube.com/watch?v=dkZFtimgAcM&t=36s}{Thanks to Douglas Crawford}}
     \item ``\textit{Just a Monoid in the category of Endofunctors.}''\footnote{
       \href{http://james-iry.blogspot.com/2009/05/brief-incomplete-and-mostly-wrong.html}
            {Thanks to James Iry.}}
     \item Burritos!?
       \footnote{
         \href{https://byorgey.wordpress.com/2009/01/12/abstraction-intuition-and-the-monad-tutorial-fallacy/}
-             {Thanks to Brent Yorgy.}}\footnote{Not to be confused with \href{https://emorehouse.wescreates.wesleyan.edu/silliness/burrito_monads.pdf}{Ed Morehouse's excellent category theoretic paper for Hungry readers.}}
+             {Thanks to Brent Yorgy.}}
+             \footnote{Not to be confused with \href{https://emorehouse.wescreates.wesleyan.edu/silliness/burrito_monads.pdf}{Ed Morehouse's excellent paper} for Hungry readers.}
   \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Ok...So what's a Monad?}
+     \includegraphics[width=\textwidth, height=\textheight]{MonadFormalDef.png}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Lets try again...}
+    \begin{itemize}
+      \item A Monad is an algebra\footnote{Technically a Kleisli Triple}.
+      \item A Monad is a way to sequence effectful computations.
+      \item A Monad is a way to enforce referential transparency and purity.
+      \item A Monad is a way to reason about the universe.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Let's start with the Algebra}
+  \begin{align*}
+    \text{Let } C &= \text{M must also be an Applicative!} \\
+    \text{Let } M &= (C, A, F, L) \\
+    \text{Let } F &= \{ \\
+          &\;\;\; \mu : M(M(A)) \to M(A), \\
+          &\;\;\; >>= \;: M(A) \to (A \to M(B)) \to M(B) \} \\
+    \text{Let } L &= \{ \\
+                  &\;\;\;pureIdLeft : pure(x) >>= f = f(x), \\
+                  &\;\;\;pureIdRight : m >>= pure = m, \\
+                  &\;\;\;assoc : m >>= (\lambda x.f(x) >>= g) = (m >>= f) >>= g \}
+  \end{align*}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Verified Monads}
+  \begin{itemize}
+    \item Time for the demo.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{what about the rest?}
+    \begin{itemize}
+      \item \sout{A Monad is an algebra.}
+      \item A Monad is a way to sequence effectful computations.
+      \item A Monad is a way to enforce referential transparency and purity.
+      \item A Monad is a way to reason about the universe.
+    \end{itemize}
+\end{frame}
 
 \begin{frame}[fragile]
 \frametitle{References}
