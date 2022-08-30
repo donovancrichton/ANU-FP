@@ -19,7 +19,7 @@
 \newenvironment{code}{\captionsetup{type=listing}}{}
 \SetupFloatingEnvironment{listing}{name=Listing}
 
-\title{Functors, Applicatives, Monoids, and Monads)}
+\title{Functors and Applicative Functors}
 \author{Donovan Crichton}
 \date{August 2022}
 
@@ -32,7 +32,7 @@
   \begin{itemize}
   \item Slides and Examples available at:
     \url{https://github.com/donovancrichton/ANU-FP}
-  \item This talk: /FunctorsAndMore
+  \item This talk: /FunctorsAndApplicatives
   \end{itemize}
 \end{frame}
 
@@ -169,7 +169,7 @@ Methods:
 \begin{frame}[fragile]
   \frametitle{Applicative Functors 2}
   Our Algebra for Applicative Functors is formally: \\
-  Let $F = (A,\{pure,\langle \ast \rangle>\},\{id, com, hom, int\})$ \\
+  Let $F = (A,\{pure,\langle \ast \rangle\},\{id, com, hom, int\})$ \\
   \\
   Why is the Applicative algebra also a Functor? \\
   We can define $map$ as follows: \\
